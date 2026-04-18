@@ -4,9 +4,10 @@ import { currentUser } from '@/data/mockData';
 
 interface ProfilePanelProps {
   onCall: (type: 'audio' | 'video', id: string, name: string, avatar: string) => void;
+  onLogout?: () => void;
 }
 
-export default function ProfilePanel({ onCall }: ProfilePanelProps) {
+export default function ProfilePanel({ onCall, onLogout }: ProfilePanelProps) {
   const [notifications, setNotifications] = useState(true);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [darkMode, setDarkMode] = useState(true);
@@ -133,7 +134,10 @@ export default function ProfilePanel({ onCall }: ProfilePanelProps) {
           ))}
         </div>
 
-        <button className="w-full mt-3 flex items-center justify-center gap-2 px-4 py-3 rounded-2xl glass border border-red-500/20 text-red-400 hover:bg-red-500/10 hover:border-red-500/40 transition-all duration-300 text-sm font-semibold">
+        <button
+          onClick={onLogout}
+          className="w-full mt-3 flex items-center justify-center gap-2 px-4 py-3 rounded-2xl glass border border-red-500/20 text-red-400 hover:bg-red-500/10 hover:border-red-500/40 transition-all duration-300 text-sm font-semibold"
+        >
           <Icon name="LogOut" size={16} />
           Выйти из аккаунта
         </button>

@@ -9,7 +9,11 @@ import CallOverlay from './CallOverlay';
 import { useMessengerStore } from '@/store/messengerStore';
 import Icon from '@/components/ui/icon';
 
-export default function MessengerLayout() {
+interface MessengerLayoutProps {
+  onLogout?: () => void;
+}
+
+export default function MessengerLayout({ onLogout }: MessengerLayoutProps) {
   const store = useMessengerStore();
 
   const activeChat = store.activeChatId
@@ -71,7 +75,7 @@ export default function MessengerLayout() {
           {store.activeTab === 'groups' && <GroupsPanel />}
           {store.activeTab === 'search' && <SearchPanel />}
           {store.activeTab === 'profile' && (
-            <ProfilePanel onCall={handleCallFromContacts} />
+            <ProfilePanel onCall={handleCallFromContacts} onLogout={onLogout} />
           )}
         </div>
       </div>
